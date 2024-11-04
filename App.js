@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-
+import { useState } from 'react';
 import ProgrammingLanguageItem from './components/ProgrammingLanguageItem.jsx';
 
 const programmingLanguages = [
@@ -38,25 +38,32 @@ const programmingLanguages = [
 ];
 
 export default () => {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    setIsRefreshing(true);
+    setTimeout(() => setIsRefreshing(false), 2000);
+  };
+
   return (
-    <View>
-      <SafeAreaProvider>
-        <SafeAreaView>
-            <FlatList 
-              data={programmingLanguages}
-              renderItem={({ item }) =>
-                (
-                  <ProgrammingLanguageItem
-                    languageName={item.languageName}
-                    experience={item.experience}
-                    logoSource={item.logoSource}
-                  />
-                )}
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <FlatList 
+          data={programmingLanguages}
+          renderItem={({ item }) => (
+            <ProgrammingLanguageItem
+              languageName={item.languageName}
+              experience={item.experience}
+              logoSource={item.logoSource}
             />
-        </SafeAreaView>
-      </SafeAreaProvider>
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          refreshing={isRefreshing}
+          onRefresh={onRefresh}
+        />
+      </SafeAreaView>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaProvider>
   );
 };
 
