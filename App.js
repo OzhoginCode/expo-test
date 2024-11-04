@@ -39,29 +39,24 @@ const programmingLanguages = [
 
 export default () => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        {/* <View style={styles.container}> */}
-          <FlatList 
-            data={programmingLanguages}
-            renderItem={({ item }) =>
-              (
-                <ProgrammingLanguageItem
-                  languageName={item.languageName}
-                  experience={item.experience}
-                  logoSource={item.logoSource}
-                />
-              )}
-          />
-          {/* <ProgrammingLanguageItem
-            languageName={'JS'}
-            experience={'Опыт: 1 год'}
-            logoSource={require('./assets/JS-logo.png')}
-          /> */}
-          {/* <StatusBar style="auto" /> */}
-        {/* </View> */}
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <View>
+      <SafeAreaProvider>
+        <SafeAreaView>
+            <FlatList 
+              data={programmingLanguages}
+              renderItem={({ item }) =>
+                (
+                  <ProgrammingLanguageItem
+                    languageName={item.languageName}
+                    experience={item.experience}
+                    logoSource={item.logoSource}
+                  />
+                )}
+            />
+        </SafeAreaView>
+      </SafeAreaProvider>
+      <StatusBar style="auto" />
+    </View>
   );
 };
 
